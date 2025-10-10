@@ -77,6 +77,13 @@ public class Magasin {
 
 
     public boolean ajouterProduit(Product p) {
+        // Vérifier d'abord si le produit existe déjà dans le magasin
+        if (chercherProduit(p)) {
+            System.out.println("[ERREUR] Le produit " + p.getLabel() + " existe déjà dans le magasin " + ID);
+            return false;
+        }
+
+        // Ensuite vérifier la capacité
         if (nbProduits < this.CAPACITE) {
             this.produits[nbProduits] = p;
             nbProduits++;
@@ -85,7 +92,7 @@ public class Magasin {
             System.out.println("\n[INFO] Produit ajouté au magasin " + ID);
             System.out.println("[INFO] Produits dans ce magasin : " + nbProduits + "\n");
             return true;
-        }else  {
+        } else {
             System.out.println("[ERREUR] Magasin " + ID + " plein !");
             return false;
         }

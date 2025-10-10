@@ -95,6 +95,10 @@ public class Main {
         // Test méthode comparer static avec deux paramètres
         System.out.println("Comparer(p1, p2) : " + Product.comparer(p1, p2)); // false
 
+        System.out.println("\n===============  Test méthode rechercher ==============\n");
+
+        Product p4 = new Product(3250, ", Tomate", ", Sicam", 1.200); // Dupliqué
+        m1.ajouterProduit(p4); //  Échoue - produit déjà existant
 
 
 
