@@ -91,6 +91,19 @@ public class Magasin {
         }
     }
 
+    //  Méthode pour chercher un produit
+    public boolean chercherProduit(Product produitRecherche) {
+        if (produitRecherche == null) return false;
+
+        for (int i = 0; i < nbProduits; i++) {
+            // Utilisation de la méthode comparer avec un paramètre
+            if (produits[i].comparer(produitRecherche)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
     //pour les compteur locaux de chaque magasin

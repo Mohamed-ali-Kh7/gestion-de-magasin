@@ -14,6 +14,7 @@ public class Main {
 
         Product p = new Product();
         Product p1 = new Product(1021, ", Lait", ", Delice",0);
+        Product p1Duplique = new Product(1021, ", Lait", ", Delice",0);
         Product p2 = new Product(2510, ", Yaourt", ", Vitalait", 0);
         Product p3 = new Product(3250, ", Tomate", ", Sicam", 1.200);
 
@@ -24,8 +25,8 @@ public class Main {
         p3.afficheInfos();
 
         System.out.println("=== Edite prix product 1 ===");
-        p1.setPrix(0.700);
-        p1.afficheInfos();
+        p2.setPrix(0.700);
+        p2.afficheInfos();
 
         System.out.println("=== Edite prix product 2===");
         p2.setPrix(1.500);
@@ -52,6 +53,7 @@ public class Main {
 
         // Ajouter produits a m1
         m1.ajouterProduit(p1);
+        m1.ajouterProduit(p1Duplique);
         m1.ajouterProduit(p2);
         m1.ajouterProduit(p3);
 
@@ -85,7 +87,13 @@ public class Main {
         // afficher le total des produits dans tt les magasins
         System.out.println("\n \n [INFO] Nombre total de produits : " + Magasin.getTotalProduits() + " \n \n");
 
-        System.out.println("=============================\n");
+        System.out.println("===============  méthode comparer ==============\n");
+
+        // Test méthode comparer avec un paramètre
+        System.out.println("p1.comparer(p1Duplique) : " + p1.comparer(p1Duplique)); //true
+
+        // Test méthode comparer static avec deux paramètres
+        System.out.println("Comparer(p1, p2) : " + Product.comparer(p1, p2)); // false
 
 
 
