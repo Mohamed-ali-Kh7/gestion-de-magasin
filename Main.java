@@ -1,3 +1,6 @@
+import com.gestion.employee.Caissier;
+import com.gestion.employee.Responsable;
+import com.gestion.employee.Vendeur;
 import com.gestion.magasin.Magasin;
 import entity.Product;
 
@@ -45,7 +48,7 @@ public class Main {
 
         System.out.println("\n ************************* Magasin ********************\n");
 
-        Magasin m1 = new Magasin();
+        Magasin m1 = new Magasin(2, "Menzah 6");
 
         // Ajouter produits a m1
         m1.ajouterProduit(p1);
@@ -58,7 +61,18 @@ public class Main {
         m2.ajouterProduit(p1);
         m2.ajouterProduit(p2);
 
+        System.out.println("\n ************************* Employee ********************\n");
 
+        //  Création des employés
+        Caissier caissier2Carrefour = new Caissier("Fatma Ben Salah", "Ariana", 175, 2);
+        Vendeur vendeurCarrefour = new Vendeur("Mohamed Dridi", "Ben Arous", 160, 5000);
+        Responsable responsableMonoprix = new Responsable("Nadia Fersi", "Bardo", 175, 250);
+
+        m1.ajouterEmploye(caissier2Carrefour);
+        m1.ajouterEmploye(vendeurCarrefour);
+        m2.ajouterEmploye(responsableMonoprix);
+
+        System.out.println("=============================\n");
 
         // Affichage
         m1.afficheMagasinInfos();
@@ -72,6 +86,7 @@ public class Main {
         System.out.println("\n \n [INFO] Nombre total de produits : " + Magasin.getTotalProduits() + " \n \n");
 
         System.out.println("=============================\n");
+
 
 
 

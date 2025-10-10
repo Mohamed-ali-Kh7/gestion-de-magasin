@@ -1,48 +1,115 @@
-package Magasin;
+package com.gestion.magasin;
+import com.gestion.employee.Employee;
 import entity.Product;
 
 public class Magasin {
-    int ID;
-    String adresse;
-    int capacite;
-    Product[] produits;
-    int nbProduits ;
+    private int ID;
+    private String adresse;
+    private final int CAPACITE=50;
+    private Product[] produits = new Product[this.CAPACITE]; // creer un tab pour tt les les instances de magasin
+    private int nbProduits = 0 ;
+    private final int CAPACITE_EM=50;
+    private Employee[] employes =  new Employee[this.CAPACITE_EM];
+    private int nbEmployes;
+
+    private static int nbMagasin = 0; //commune à toutes les instances
+    private static int nbTotalProduits = 0;
 
     public Magasin() {
-        this.ID = 0;
-        this.adresse="inconnu";
-        this.capacite=50;
-        this.produits= new Product[this.capacite];
-        this.nbProduits = 0;
+        ID = 0;
+        adresse= null;
+        nbProduits = 0;
+        nbEmployes = 0;
+        nbMagasin++;
+        System.out.println("\n[INFO] Magasin " + this.ID + " creé !!");
+        System.out.println("[INFO] Total des magasins : " + nbMagasin + "\n");
+        //le tab va creer automatiquement
+        // snn , je peux creer manualement avec une capacité donné 'this.produits = new Product[capacite];'
+
     }
 
-    public Magasin(int ID, String adresse, int capacite) {
+    public Magasin(int ID, String adresse) {
         this.ID = ID;
         this.adresse = adresse;
-        this.capacite = capacite;
-        this.produits = new Product[capacite];
-        this.nbProduits = 0;
+        nbMagasin++;
+        System.out.println("\n[INFO] Magasin " + this.ID + " creé !!");
+        System.out.println("[INFO] Total des magasins : " + nbMagasin + "\n");
 
     }
 
     public void afficheMagasinInfos() {
-        System.out.println("ID: " + ID + ", Adresse: "+ adresse +", Capacité : " + capacite +" Nombre produits : "+ nbProduits);
+        System.out.println("ID: " + ID + ", Adresse: "+ adresse +", Capacité : " + CAPACITE +", Nombre produits : "+ nbProduits);
         System.out.println("Liste des produits de cette magasin :");
+
         for (int i = 0; i < nbProduits; i++) {
-            System.out.println("   -"+ i + "- " +produits[i]);
+            if(produits[i] != null){
+                System.out.println("   - " + (i + 1) + " " + produits[i] + "\n");
+            }
+
         }
 
     }
 
-    public boolean ajouterProduit(Product p) {
-        if (nbProduits < this.capacite) {
-            this.produits[nbProduits] = p;
-            nbProduits++;
+    // Méthode pour ajouter un employé
+    public boolean ajouterEmploye(Employee employe) {
+        if (nbEmployes < CAPACITE_EM) {
+            employes[nbEmployes] = employe;
+            nbEmployes++;
+            System.out.println("[INFO] Employé " + employe.getNom() + " ajouté au magasin " + adresse);
             return true;
-        }else  {
-            System.out.println("!! Capacité de magazin atteinte");
+        } else {
+            System.out.println("[ERREUR] Magasin " + adresse + " a atteint le maximum d'employés (20)");
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        String str = "L'ensemble des produits :\n";
+        for (int i = 0; i < nbProduits; i++) {
+            str += produits[i] + "\n";
+        }
+
+        return "Identifiant : " + ID
+                + " | Adresse : " + adresse
+                + "\n" + str;
+    }
+
+
+    public boolean ajouterProduit(Product p) {
+        if (nbProduits < this.CAPACITE) {
+            this.produits[nbProduits] = p;
+            nbProduits++;
+            nbTotalProduits++;
+
+            System.out.println("\n[INFO] Produit ajouté au magasin " + ID);
+            System.out.println("[INFO] Produits dans ce magasin : " + nbProduits + "\n");
+            return true;
+        }else  {
+            System.out.println("[ERREUR] Magasin " + ID + " plein !");
+            return false;
+        }
+    }
+
+
+
+    //pour les compteur locaux de chaque magasin
+    public int getNbProduits() {
+        return nbProduits;
+    }
+
+    public int getNbEmployes() {
+        return nbEmployes;
+    }
+
+    //pour les compteur globaux de tous les produits et les magasin
+
+    public static int getTotalProduits() {
+        return nbTotalProduits;
+    }
+
+    public static int getTotalMagasin() {
+        return nbMagasin;
     }
 
 }

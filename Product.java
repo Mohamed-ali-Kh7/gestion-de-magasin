@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Product {
 
-     int ID;
-     String Label;
-     String Marque;
-     double Prix;
-     Date dateExpiration;
+     private int ID;
+     private String Label;
+     private String Marque;
+     private double Prix;
+     private Date dateExpiration;
 
     //constructeur par defaut
     public Product() {
