@@ -1,4 +1,4 @@
-import Magasin.Magasin;
+import com.gestion.magasin.Magasin;
 import entity.Product;
 
 import java.util.Date;
@@ -44,15 +44,34 @@ public class Main {
         p3.afficheInfos();
 
         System.out.println("\n ************************* Magasin ********************\n");
-        Magasin m1 = new Magasin(1, "Tunis", 5);
 
-        // Ajouter produits
+        Magasin m1 = new Magasin();
+
+        // Ajouter produits a m1
         m1.ajouterProduit(p1);
         m1.ajouterProduit(p2);
         m1.ajouterProduit(p3);
 
+
+        Magasin m2 = new Magasin(1, "Tunis");
+        // Ajouter produits
+        m2.ajouterProduit(p1);
+        m2.ajouterProduit(p2);
+
+
+
         // Affichage
         m1.afficheMagasinInfos();
+
+        System.out.println(m2);
+
+        // afficher le total des magasin creés
+        System.out.println("\n \n [INFO] Nombre total de magasins : " + Magasin.getTotalMagasin() + " \n \n");
+
+        // afficher le total des produits dans tt les magasins
+        System.out.println("\n \n [INFO] Nombre total de produits : " + Magasin.getTotalProduits() + " \n \n");
+
+        System.out.println("=============================\n");
 
 
 
