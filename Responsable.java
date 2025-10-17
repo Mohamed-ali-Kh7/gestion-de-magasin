@@ -4,14 +4,23 @@ public class Responsable extends Employee {
     private  double prime;
 
     public Responsable() {
-        this.nom = nom;
-        this.adresse = "inconnu";
-        this.nbrHeures = 0;
         this.prime = prime;
     }
 
     public Responsable(String nom, String adresse, int nbrHeures,  double prime) {
         super(nom, adresse, nbrHeures);
         this.prime = prime;
+    }
+
+    @Override
+    public double calculerSalaire() {
+        double salaireBase;
+        if (nbrHeures <= 160) {
+            salaireBase = nbrHeures * 10;
+        } else {
+            int heuresSupp = nbrHeures - 160;
+            salaireBase = (160 * 10) + (heuresSupp * 10 * 1.2);
+        }
+        return salaireBase + prime;
     }
 }

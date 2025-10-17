@@ -44,6 +44,21 @@ public class Product {
     public void setDateExpiration(Date dateExpiration) { this.dateExpiration = dateExpiration; }
 
 
+    // Méthode comparer avec un seul produit (a)
+    public boolean comparer(Product autreProduit) {
+        if (autreProduit == null) return false;
+        return this.ID == autreProduit.ID &&
+                this.Label.equals(autreProduit.Label) &&
+                this.Prix == autreProduit.Prix;
+    }
+
+    // Méthode comparer avec deux produits (b) - STATIC
+    public static boolean comparer(Product p1, Product p2) {
+        if (p1 == null || p2 == null) return false;
+        return p1.ID == p2.ID &&
+                p1.Label.equals(p2.Label) &&
+                p1.Prix == p2.Prix;
+    }
 
     public void afficheInfos() {
         System.out.println("ID: " + ID + ", Label: "+ Label +", Marque :" + Marque + ", Prix : " + Prix + ", Date Expiration: " + dateExpiration );

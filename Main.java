@@ -1,4 +1,5 @@
 import com.gestion.employee.Caissier;
+import com.gestion.employee.Employee;
 import com.gestion.employee.Responsable;
 import com.gestion.employee.Vendeur;
 import com.gestion.magasin.Magasin;
@@ -65,27 +66,48 @@ public class Main {
 
         System.out.println("\n ************************* Employee ********************\n");
 
-        //  Création des employés
+        //  Création des employés  pour la 1er magasin
+        Caissier caissier1Monoprix = new Caissier("Salah", "Tunis", 145, 5);
         Caissier caissier2Carrefour = new Caissier("Fatma Ben Salah", "Ariana", 175, 2);
         Vendeur vendeurCarrefour = new Vendeur("Mohamed Dridi", "Ben Arous", 160, 5000);
         Responsable responsableMonoprix = new Responsable("Nadia Fersi", "Bardo", 175, 250);
 
+        System.out.println("\n============== ajouter les employées au magasin 1 ===============\n");
+        m1.ajouterEmploye(caissier1Monoprix);
         m1.ajouterEmploye(caissier2Carrefour);
         m1.ajouterEmploye(vendeurCarrefour);
-        m2.ajouterEmploye(responsableMonoprix);
+        m1.ajouterEmploye(responsableMonoprix);
 
-        System.out.println("=============================\n");
+        //  Création des employés  pour la 2eme magasin
+        Caissier caissier3Mg = new Caissier("moncef", "Bardo", 139, 7);
+        Vendeur vendeur1Mg = new Vendeur("Leila", "Megrine", 75, 456);
+        Vendeur vendeur2Carrefour = new Vendeur("Mohamed", "Ben Arous", 150, 5000);
+        Vendeur vendeur3Monoprix = new Vendeur("Saber", "Zaghoun", 178, 5000);
+        Responsable responsable2Mg = new Responsable("Rafik", "Nabeul", 6, 1000);
 
-        // Affichage
+        System.out.println("\n============== ajouter les employées au magasin 2 ===============\n");
+        m2.ajouterEmploye(caissier3Mg);
+        m2.ajouterEmploye(vendeur1Mg);
+        m2.ajouterEmploye(vendeur2Carrefour);
+        m2.ajouterEmploye(vendeur3Monoprix);
+        m2.ajouterEmploye(responsable2Mg);
+
+        System.out.println("\n============================= affiche les infos de magasin 1 avec la function d'affichage  ==============================\n");
+
         m1.afficheMagasinInfos();
+
+        System.out.println("\n============================= affiche les infos de magasin 1 avec ToString  ==============================\n");
 
         System.out.println(m2);
 
         // afficher le total des magasin creés
-        System.out.println("\n \n [INFO] Nombre total de magasins : " + Magasin.getTotalMagasin() + " \n \n");
+        System.out.println("\n \n [INFO] Nombre total de magasins : " + Magasin.getTotalMagasin() + " \n");
 
         // afficher le total des produits dans tt les magasins
-        System.out.println("\n \n [INFO] Nombre total de produits : " + Magasin.getTotalProduits() + " \n \n");
+        System.out.println("\n [INFO] Nombre total de produits : " + Magasin.getTotalProduits() + " \n");
+
+        // afficher le total des employees dans tt les magasins
+        System.out.println("\n [INFO] Nombre total de employees : " + Magasin.getNbTotalEmplyees() + " \n \n");
 
         System.out.println("===============  méthode comparer ==============\n");
 
@@ -101,6 +123,20 @@ public class Main {
         m1.ajouterProduit(p4); //  Échoue - produit déjà existant
 
 
+        System.out.println("\n===============  Test méthode affichage pour les enfants de Employee ==============\n");
 
+
+        Responsable r1 = new Responsable( "Amine", "Tunis", 170, 200);
+        Caissier c1 = new Caissier( "Sami", "manouba", 200,1);
+        Vendeur v1 = new Vendeur("Rania", "ben arous ", 80,0.8); // 80%
+        Employee e = new Vendeur("Rami", "ben arous ", 80,0.8); // 80%
+        if (e instanceof Vendeur) { // sécurité
+            Vendeur v = (Vendeur) e; // downcast
+            System.out.println("Taux de vente : " + v.getTauxDeVente());
+        }
+
+        r1.afficherSalaire();
+        c1.afficherSalaire();
+        v1.afficherSalaire();
     }
 }

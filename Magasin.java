@@ -14,6 +14,7 @@ public class Magasin {
 
     private static int nbMagasin = 0; //commune à toutes les instances
     private static int nbTotalProduits = 0;
+    private static int nbTotalEmplyees = 0;
 
     public Magasin() {
         ID = 0;
@@ -38,8 +39,8 @@ public class Magasin {
     }
 
     public void afficheMagasinInfos() {
-        System.out.println("ID: " + ID + ", Adresse: "+ adresse +", Capacité : " + CAPACITE +", Nombre produits : "+ nbProduits);
-        System.out.println("Liste des produits de cette magasin :");
+        System.out.println("ID: " + ID + ", Adresse: "+ adresse +", Capacité : " + CAPACITE +", Nombre produits : "+ nbProduits+", Nombre Employees : "+ nbEmployes);
+        System.out.println("\nListe des produits de cette magasin : ");
 
         for (int i = 0; i < nbProduits; i++) {
             if(produits[i] != null){
@@ -48,31 +49,47 @@ public class Magasin {
 
         }
 
+        System.out.println("Liste des employees dans cette magasin :");
+
+        for (int i = 0; i < nbEmployes; i++) {
+            if(employes[i] != null){
+                System.out.println("   - " + (i + 1) + " " + employes[i] + "\n");
+            }
+
+        }
+
     }
+
+    @Override
+    public String toString() {
+        String strP = "L'ensemble des Produits :\n";
+        String strE = "L'ensemble des Employes :\n";
+        for (int i = 0; i < nbProduits; i++) {
+            strP += produits[i] + "\n";
+        }
+        for (int i = 0; i < nbEmployes; i++) {
+            strE += employes[i] + "\n";
+        }
+
+        return "Identifiant : " + ID
+                + " | Adresse : " + adresse
+                + "\n" + strP
+                + "\n" + strE;
+    }
+
 
     // Méthode pour ajouter un employé
     public boolean ajouterEmploye(Employee employe) {
         if (nbEmployes < CAPACITE_EM) {
             employes[nbEmployes] = employe;
             nbEmployes++;
+            nbTotalEmplyees++;
             System.out.println("[INFO] Employé " + employe.getNom() + " ajouté au magasin " + adresse);
             return true;
         } else {
             System.out.println("[ERREUR] Magasin " + adresse + " a atteint le maximum d'employés (20)");
             return false;
         }
-    }
-
-    @Override
-    public String toString() {
-        String str = "L'ensemble des produits :\n";
-        for (int i = 0; i < nbProduits; i++) {
-            str += produits[i] + "\n";
-        }
-
-        return "Identifiant : " + ID
-                + " | Adresse : " + adresse
-                + "\n" + str;
     }
 
 
@@ -130,6 +147,10 @@ public class Magasin {
 
     public static int getTotalMagasin() {
         return nbMagasin;
+    }
+
+    public static int getNbTotalEmplyees() {
+        return nbTotalEmplyees;
     }
 
 }

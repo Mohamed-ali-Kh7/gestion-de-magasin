@@ -1,6 +1,6 @@
 package com.gestion.employee;
 
-public class Employee {
+public abstract class Employee {
     protected  int id;
     protected  String nom;
     protected  String adresse;
@@ -20,6 +20,21 @@ public class Employee {
         this.adresse = adresse;
         this.nbrHeures = nbrHeures;
     }
+
+    public String toString() {
+        return "Employee{" +
+                "ID=" + id +
+                ", Nom='" + nom + '\'' +
+                ", Adresse='" + adresse + '\'' +
+                ", Nom Heures=" + nbrHeures +
+                '}';
+    }
+
+    public void afficherSalaire() {
+        System.out.println("Employé : " + nom + " | Salaire : " + calculerSalaire() + " DT");
+    }
+
+    public abstract double calculerSalaire() ;
 
     // Getters
     public int getId() { return id; }
