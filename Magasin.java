@@ -8,7 +8,7 @@ import gestionException.PrixNegatifException;
 public class Magasin {
     private int ID;
     private String adresse;
-    private final int CAPACITE = 50;
+    private final int CAPACITE = 1;
     private Product[] produits = new Product[this.CAPACITE]; // tableau des produits
     private int nbProduits = 0;
 
@@ -108,7 +108,7 @@ public class Magasin {
         }
 
         // Vérifier le prix
-        if (p.getPrix() <= 0) {
+        if (p.getPrix() < 0) {
             throw new PrixNegatifException("Erreur : Le prix doit être positif !");
         }
 
