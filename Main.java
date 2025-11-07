@@ -4,6 +4,7 @@ import com.gestion.employee.Responsable;
 import com.gestion.employee.Vendeur;
 import com.gestion.magasin.Magasin;
 import entity.Product;
+import gestionException.*;
 
 import java.util.Date;
 
@@ -14,9 +15,9 @@ public class Main {
         System.out.printf("Hello in our Store!\n");
 
         Product p = new Product();
-        Product p1 = new Product(1021, ", Lait", ", Delice",0);
-        Product p1Duplique = new Product(1021, ", Lait", ", Delice",0);
-        Product p2 = new Product(2510, ", Yaourt", ", Vitalait", 0);
+        Product p1 = new Product(1021, ", Lait", ", Delice",120);
+        Product p1Duplique = new Product(1021, ", Lait", ", Delice",120);
+        Product p2 = new Product(2510, ", Yaourt", ", Vitalait", -30);
         Product p3 = new Product(3250, ", Tomate", ", Sicam", 1.200);
 
         System.out.println("=== Liste des produits ===");
@@ -26,11 +27,11 @@ public class Main {
         p3.afficheInfos();
 
         System.out.println("=== Edite prix product 1 ===");
-        p2.setPrix(0.700);
-        p2.afficheInfos();
+        p1.setPrix(0.700);
+        p1.afficheInfos();
 
         System.out.println("=== Edite prix product 2===");
-        p2.setPrix(1.500);
+        //p2.setPrix(1.500);
         p2.afficheInfos();
 
         System.out.println("\n=== Avec toString ===");
@@ -53,16 +54,42 @@ public class Main {
         Magasin m1 = new Magasin(2, "Menzah 6");
 
         // Ajouter produits a m1
-        m1.ajouterProduit(p1);
-        m1.ajouterProduit(p1Duplique);
-        m1.ajouterProduit(p2);
-        m1.ajouterProduit(p3);
+
+        //m1.ajouterProduit(p2); // a un prix negatif
+        try {
+            m1.ajouterProduit(p2);
+        } catch (PrixNegatifException e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        } catch (MagasinPleinException e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        }
+
+        //m1.ajouterProduit(p1);
+        try {
+            m1.ajouterProduit(p1);
+        } catch (PrixNegatifException e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        } catch (MagasinPleinException e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        }
+
+        //m1.ajouterProduit(p1Duplique);
+
+        //m1.ajouterProduit(p3);
+        //capacité modifié a 1 pour tester l'exception de capacité dépassée
+        try {
+            m1.ajouterProduit(p3);
+        } catch (PrixNegatifException e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        } catch (MagasinPleinException e) {
+            System.out.println("[ERREUR] " + e.getMessage());
+        }
 
 
         Magasin m2 = new Magasin(1, "Tunis");
         // Ajouter produits
-        m2.ajouterProduit(p1);
-        m2.ajouterProduit(p2);
+        //m2.ajouterProduit(p1);
+        //m2.ajouterProduit(p2);
 
         System.out.println("\n ************************* Employee ********************\n");
 
@@ -120,7 +147,10 @@ public class Main {
         System.out.println("\n===============  Test méthode rechercher ==============\n");
 
         Product p4 = new Product(3250, ", Tomate", ", Sicam", 1.200); // Dupliqué
-        m1.ajouterProduit(p4); //  Échoue - produit déjà existant
+
+        //m1.ajouterProduit(p4); //  Échoue - produit déjà existant
+
+
 
 
         System.out.println("\n===============  Test méthode affichage pour les enfants de Employee ==============\n");
